@@ -1,4 +1,6 @@
-class Gif {
+import 'package:equatable/equatable.dart';
+
+class Gif extends Equatable {
   final String id;
   final String title;
   final String url;
@@ -10,10 +12,29 @@ class Gif {
   });
 
   factory Gif.fromJson(Map<String, dynamic> json) {
+    if (!json.containsKey('id') ||
+        !json.containsKey('title') ||
+        !json.containsKey('images')) {
+      throw Exception('Invalid JSON');
+    }
+
+    var images = json['images'];
+    if (!images.containsKey('preview_gif')) {
+      throw Exception('Invalid JSON');
+    }
+
+    var previewGif = images['preview_gif'];
+    if (!previewGif.containsKey('url')) {
+      throw Exception('Invalid JSON');
+    }
+
     return Gif(
       id: json['id'],
       title: json['title'],
-      url: json['images']['preview_gif']['url'],
+      url: previewGif['url'],
     );
   }
+
+  @override
+  List<Object?> get props => [id, title, url];
 }

@@ -1,15 +1,22 @@
+import 'package:chili_labs_task/data/repository/gif_repository.dart';
 import 'package:chili_labs_task/presentation/bloc/search_bloc.dart';
+import 'package:chili_labs_task/presentation/screens/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:http/http.dart' as http;
 
 Future<void> main() async {
-  await dotenv.load(fileName: '.env');
-  runApp(const MyApp());
+  await dotenv.load();
+  final gifRepository = GifRepository(client: http.Client());
+  runApp(MyApp(
+    gifRepository: gifRepository,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final gifRepository;
+  const MyApp({super.key, this.gifRepository});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,8 +27,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: BlocProvider(
-        create: (context) => SearchBloc(),
-        child: const GiphySearchScreen(),
+        create: (context) => SearchBloc(gifRepository: gifRepository),
+        child: SearchScreen(),
       ),
     );
   }
