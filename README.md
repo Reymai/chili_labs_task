@@ -1,16 +1,31 @@
 # chili_labs_task
 
-A new Flutter project.
+This project is built using Flutter version 3.19.0.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Before you start, make sure you have Flutter 3.19.0 installed on your machine. You can check your Flutter version by running the following command in your terminal:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter --version
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Setup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+if you don't have Flutter installed or your version is outdated, you can download it from the [official Flutter website](flutter.dev).
+
+This project requires an API key which should be stored in a .env file in the project root directory. You can use the provided .env.example file as a template. 
+Simply copy the .env.example file, rename the copy to .env, and replace YOUR_API_KEY with your actual API key:
+
+```bash
+cp .env.example .env
+```
+
+Then open .env file and replace YOUR_API_KEY with your actual API key.
+
+## Running the app
+After setting up the .env file, you can run the project using the following command:
+
+```bash
+flutter run
+```
